@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import profilePic from "/profilepicture.png";
+import resume from "/Ali_Resume.pdf";
 import { Typewriter } from "react-simple-typewriter";
 import { Link } from "react-router-dom";
 
@@ -53,7 +54,7 @@ export default function Hero() {
               View My Work
             </Link>
             <a
-              href="/resume.pdf"
+              href={resume}
               download
               className="px-6 py-3 border border-[#8B5CF6] text-[#8B5CF6] font-semibold rounded-md hover:bg-[#8B5CF6] hover:text-white transition"
             >
