@@ -11,35 +11,51 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[url('/noise-overlay.png')] opacity-[0.03] mix-blend-screen animate-pulse-slow" />
       </div>
 
-      <motion.div
-        className="absolute top-1/2 left-2/3 w-[600px] h-[600px] bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] opacity-20 blur-3xl rounded-full -translate-x-1/2 -translate-y-1/2 z-0"
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ duration: 12, repeat: Infinity }}
-      />
+      <div className="absolute top-1/2 left-2/3 w-[600px] h-[600px] bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] opacity-20 blur-3xl rounded-full -translate-x-1/2 -translate-y-1/2 z-0" />
 
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-between h-full gap-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            duration: 1.2,
+            delay: 0.5,
+            type: "spring",
+            stiffness: 100,
+          }}
           className="text-center md:text-left max-w-lg"
         >
           <h1 className="text-4xl md:text-6xl font-extrabold text-[#8B5CF6]">
             Muhammad Ali Mehmood
           </h1>
-
-          <p className="text-xl md:text-2xl text-[#A1A1A1] mt-4">
-            I am a{" "}
-            <Typewriter
-              words={["Web Developer", "Software Engineer", "Tech Enthusiast"]}
-              loop={false}
-              cursor
-              cursorStyle="|"
-              typeSpeed={70}
-              deleteSpeed={50}
-              delaySpeed={1500}
-            />
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 1.2,
+              delay: 0.5,
+              type: "spring",
+              stiffness: 100,
+            }}
+            className="text-lg text-[#F5A623]"
+          >
+            <p className="text-xl md:text-2xl text-[#A1A1A1] mt-4">
+              I am a{" "}
+              <Typewriter
+                words={[
+                  "Web Developer",
+                  "Software Engineer",
+                  "Tech Enthusiast",
+                ]}
+                loop={false}
+                cursor
+                cursorStyle="|"
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1500}
+              />
+            </p>
+          </motion.div>
 
           <p className="text-md md:text-lg text-[#A1A1A1] mt-2">
             Bringing ideas to life with code — from frontends that wow to
@@ -64,9 +80,14 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
+          initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.3 }}
+          transition={{
+            duration: 1.2,
+            delay: 0.5,
+            type: "spring",
+            stiffness: 100,
+          }}
           className="relative z-10 w-64 h-64 md:w-80 md:h-80"
         >
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] blur-2xl opacity-30 z-0" />

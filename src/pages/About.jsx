@@ -79,8 +79,8 @@ export default function About() {
   return (
     <section className="bg-[#0D0D0D] text-[#EDEDED] px-6 py-16 md:px-20 overflow-hidden">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, y: 1000 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2 }}
         className="text-center max-w-4xl mx-auto mb-16"
       >
@@ -98,7 +98,12 @@ export default function About() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2 }}
+        transition={{
+          duration: 1.2,
+          delay: 0.5,
+          type: "spring",
+          stiffness: 100,
+        }}
         className="mb-20"
       >
         <h3 className="text-3xl font-bold text-[#EDEDED] mb-6 flex items-center gap-2">
@@ -129,8 +134,14 @@ export default function About() {
             <motion.div
               key={idx}
               initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, delay: idx * 0.2 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.8,
+                delay: idx * 0.3,
+                type: "spring",
+                stiffness: 80,
+              }}
               whileHover={{ scale: 1.02 }}
               className="bg-[#161616] p-6 rounded-xl shadow-md border border-[#1F1F1F]"
             >
@@ -142,7 +153,14 @@ export default function About() {
               </p>
               <ul className="list-disc list-inside text-[#D4D4D4] space-y-2 text-sm">
                 {experience.details.map((detail, detailIdx) => (
-                  <li key={detailIdx}>{detail}</li>
+                  <motion.li
+                    key={detailIdx}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.9 + detailIdx * 0.2 }}
+                  >
+                    {detail}
+                  </motion.li>
                 ))}
               </ul>
             </motion.div>
@@ -165,8 +183,11 @@ export default function About() {
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              whileHover={{ scale: 1.1 }}
+              transition={{
+                duration: 0.6,
+                delay: idx * 0.1,
+                type: "spring",
+              }}
               className="bg-[#161616] p-4 rounded-xl flex flex-col items-center gap-3 border border-[#1F1F1F] transition"
             >
               <img
@@ -211,23 +232,31 @@ export default function About() {
           ].map((cert, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, rotate: -10 }}
-              whileInView={{ opacity: 1, rotate: 0 }}
+              initial={{ opacity: 0, y: 50, rotate: -5 }}
+              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: idx * 0.2 }}
-              whileHover={{ scale: 1.05, rotate: 3 }}
+              transition={{
+                duration: 1.6,
+                type: "spring",
+                bounce: 0.4,
+              }}
+              whileHover={{
+                scale: 1.05,
+                y: -10,
+              }}
               className="bg-[#161616] p-4 rounded-xl border border-[#1F1F1F]"
             >
               <p className="text-md font-semibold text-[#D4D4D4] mb-2">
                 {cert.title}
               </p>
-              <a
+              <motion.a
+                whileHover={{ x: 5 }}
                 href={cert.link}
                 target="_blank"
-                className="text-sm text-[#8B5CF6] hover:underline"
+                className="text-sm text-[#8B5CF6] hover:underline inline-block"
               >
                 View Certificate →
-              </a>
+              </motion.a>
             </motion.div>
           ))}
         </div>
@@ -244,11 +273,13 @@ export default function About() {
           <FaGraduationCap className="text-[#8B5CF6]" /> Education
         </h3>
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.2 }}
-          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 1.6, type: "spring" }}
+          whileHover={{
+            scale: 1.05,
+          }}
           className="bg-gradient-to-r from-[#1F1F1F] to-[#2C2C2C] p-6 rounded-xl border border-[#1F1F1F] shadow-lg"
         >
           <h4 className="text-xl font-semibold text-[#8B5CF6]">
@@ -259,15 +290,29 @@ export default function About() {
           </p>
           <p className="text-xs text-[#A1A1A1] mt-1">2021 – 2025</p>
           <ul className="list-disc list-inside text-[#D4D4D4] space-y-2 text-sm">
-            <li>
+            <motion.li
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
               Focused on full-stack development, data science, and artificial
               intelligence.
-            </li>
-            <li>
+            </motion.li>
+            <motion.li
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+            >
               Participated in multiple software projects, project galas and
               speeding coding competitions.
-            </li>
-            <li>Led final year research on AI-powered real estate platform.</li>
+            </motion.li>
+            <motion.li
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.7 }}
+            >
+              Led final year research on AI-powered real estate platform.
+            </motion.li>
           </ul>
         </motion.div>
       </motion.div>
@@ -285,7 +330,7 @@ export default function About() {
           className="inline-flex items-center gap-3 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-[#0D0D0D] px-6 py-3 rounded-full font-semibold transition relative overflow-hidden"
         >
           <motion.span
-            className="absolute inset-0 bg-gradient-to-r from-[#A855F7] to-[#8B5CF6] opacity-20 blur-lg"
+            className="absolute inset-0 bg-gradient-to-r from-[#A855F7] to-[#8B5CF6] opacity-20 blur-lg "
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1.2, opacity: 0.3 }}
             viewport={{ once: true }}
@@ -293,11 +338,20 @@ export default function About() {
           />
           <Link
             to="/contact"
-            className="text-[#0D0D0D] text-lg font-semibold z-10"
+            className="flex items-center gap-2 text-[#0D0D0D] text-lg font-semibold z-10"
           >
             Let's Work Together
+            <motion.div
+              whileInView={{ x: [0, 5, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 1,
+                ease: "easeInOut",
+              }}
+            >
+              <FaArrowRight className="z-10" />
+            </motion.div>
           </Link>
-          <FaArrowRight className="z-10" />
         </motion.div>
       </div>
     </section>

@@ -17,8 +17,19 @@ export default function Projects() {
         transition={{ duration: 1, delay: 0.3, ease: "easeInOut" }}
         className="text-lg md:text-xl text-[#A1A1A1] text-center"
       >
-        Stay tuned! Exciting projects are on their way.
+        This page is currently under construction.
       </motion.p>
+      {/* show github link to view projects */}
+      <motion.a
+        href="https://github.com/ali-097"
+        target="_blank"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.6, ease: "easeInOut" }}
+        className="mt-6 text-[#8B5CF6] hover:text-[#6366F1] transition duration-300"
+      >
+        View my projects on GitHub Instead
+      </motion.a>
     </div>
   );
 }
