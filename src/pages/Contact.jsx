@@ -81,7 +81,7 @@ export default function Contact() {
               <div>
                 <p className="text-sm text-[#A1A1A1]">LinkedIn</p>
                 <a
-                  href="https://linkedin.com/in/ali097"
+                  href="https://www.linkedin.com/in/ali097"
                   target="_blank"
                   className="text-[#EDEDED] hover:text-[#8B5CF6] transition"
                 >
