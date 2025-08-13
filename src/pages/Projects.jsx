@@ -18,6 +18,11 @@ export default function Projects() {
   const [modalImage, setModalImage] = useState(null);
   const [modalProject, setModalProject] = useState(null);
 
+  const getWebPPath = (pngPath) => {
+    const fileName = pngPath.split("/").pop().replace(".png", ".webp");
+    return `/images/compressed-images/${fileName}`;
+  };
+
   const projects = [
     {
       id: 1,
@@ -165,7 +170,6 @@ export default function Projects() {
     }
   };
 
-  // Keyboard navigation for modal
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (!modalOpen) return;
@@ -200,7 +204,11 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="bg-[#0D0D0D] text-[#EDEDED] px-6 py-20 md:px-20 overflow-hidden"
+      className="text-[#EDEDED] px-6 py-20 md:px-20 overflow-hidden bg-contain bg-center"
+      style={{
+        backgroundColor: "#0D0D0D",
+        backgroundImage: "url('/bg-image.jpg')",
+      }}
     >
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -242,9 +250,7 @@ export default function Projects() {
             >
               <div className="bg-[#161616] border border-[#1F1F1F] rounded-2xl p-8 hover:border-[#8B5CF6] transition-all duration-300 hover:shadow-2xl hover:shadow-[#8B5CF6]/10">
                 <div className="flex flex-col lg:flex-row gap-8">
-                  {/* Project Images & Info */}
                   <div className="lg:w-1/2">
-                    {/* Image Carousel */}
                     <div className="relative mb-6 group/image">
                       <div
                         className="aspect-video bg-[#1E1E1E] rounded-xl overflow-hidden border border-[#2C2C2C] cursor-pointer relative"
@@ -255,19 +261,26 @@ export default function Projects() {
                           )
                         }
                       >
-                        <img
-                          src={
-                            project.images[currentImageIndex[project.id] || 0]
-                          }
-                          alt={`${project.title} screenshot`}
-                          className="w-full h-full object-contain group-hover/image:scale-105 transition-transform duration-300"
-                          onError={(e) => {
-                            e.target.style.display = "none";
-                            e.target.nextSibling.style.display = "flex";
-                          }}
-                        />
+                        <picture>
+                          <source
+                            srcSet={getWebPPath(
+                              project.images[currentImageIndex[project.id] || 0]
+                            )}
+                            type="image/webp"
+                          />
+                          <img
+                            src={
+                              project.images[currentImageIndex[project.id] || 0]
+                            }
+                            alt={`${project.title} screenshot`}
+                            className="w-full h-full object-fit group-hover/image:scale-105 transition-transform duration-300"
+                            onError={(e) => {
+                              e.target.style.display = "none";
+                              e.target.nextSibling.style.display = "flex";
+                            }}
+                          />
+                        </picture>
 
-                        {/* Zoom Overlay */}
                         <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/20 transition-all duration-300 flex items-center justify-center">
                           <div className="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
                             <FaSearchPlus className="text-white text-2xl" />
@@ -288,7 +301,6 @@ export default function Projects() {
                         </div>
                       </div>
 
-                      {/* Image Navigation */}
                       {project.images.length > 1 && (
                         <>
                           <button
@@ -310,7 +322,6 @@ export default function Projects() {
                             <FaChevronRight />
                           </button>
 
-                          {/* Image Indicators */}
                           <div className="flex justify-center mt-3 space-x-2">
                             {project.images.map((_, imgIndex) => (
                               <button
@@ -350,13 +361,11 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* Project Details */}
                   <div className="lg:w-1/2">
                     <p className="text-[#D4D4D4] mb-6 leading-relaxed">
                       {project.description}
                     </p>
 
-                    {/* Features */}
                     <div className="mb-6">
                       <h4 className="text-lg font-semibold text-[#8B5CF6] mb-3">
                         Key Features:
@@ -374,7 +383,6 @@ export default function Projects() {
                       </ul>
                     </div>
 
-                    {/* Action Button */}
                     <div className="flex flex-wrap gap-4">
                       <motion.a
                         href={project.deployment}
@@ -396,7 +404,6 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Call to Action */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -408,7 +415,7 @@ export default function Projects() {
             Want to see more of my work or discuss a potential project?
           </p>
           <motion.a
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white px-8 py-4 rounded-lg font-medium hover:shadow-lg hover:shadow-[#8B5CF6]/25 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -419,7 +426,6 @@ export default function Projects() {
         </motion.div>
       </div>
 
-      {/* Image Modal */}
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -429,13 +435,11 @@ export default function Projects() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Backdrop */}
             <div
               className="absolute inset-0 bg-black/80 backdrop-blur-sm"
               onClick={closeModal}
             />
 
-            {/* Modal Content */}
             <motion.div
               className="relative max-w-6xl max-h-[90vh] w-full"
               initial={{ scale: 0.9, opacity: 0 }}
@@ -443,7 +447,6 @@ export default function Projects() {
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
             >
-              {/* Close Button */}
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 z-10 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 hover:scale-110"
@@ -451,7 +454,6 @@ export default function Projects() {
                 <FaTimes className="text-lg" />
               </button>
 
-              {/* Modal Navigation Buttons */}
               {modalProject && modalProject.images.length > 1 && (
                 <>
                   <button
@@ -469,15 +471,16 @@ export default function Projects() {
                 </>
               )}
 
-              {/* Image Container */}
               <div className="bg-[#161616] rounded-2xl overflow-hidden border border-[#2C2C2C] shadow-2xl">
-                <img
-                  src={modalImage}
-                  alt={`${modalProject?.title} screenshot`}
-                  className="w-full h-auto max-h-[70vh] object-contain"
-                />
+                <picture>
+                  <source srcSet={getWebPPath(modalImage)} type="image/webp" />
+                  <img
+                    src={modalImage}
+                    alt={`${modalProject?.title} screenshot`}
+                    className="w-full h-auto max-h-[70vh] object-fit"
+                  />
+                </picture>
 
-                {/* Image Info */}
                 <div className="p-6 border-t border-[#2C2C2C]">
                   <div className="flex items-center justify-between flex-wrap gap-4">
                     <div>

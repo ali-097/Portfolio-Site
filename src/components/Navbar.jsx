@@ -26,7 +26,7 @@ export default function Navbar() {
         transition={{ duration: 0.5 }}
       >
         <Link to="/" className="text-xl font-bold text-[#8B5CF6]">
-          Muhammad Ali
+          Muhammad Ali Mehmood
         </Link>
       </motion.div>
 
@@ -82,7 +82,7 @@ export default function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.1 }}
             >
               {navLinks.map((link, index) => (
                 <motion.div

@@ -77,7 +77,13 @@ const softSkills = [
 
 export default function About() {
   return (
-    <section className="bg-[#0D0D0D] text-[#EDEDED] px-6 py-16 md:px-20 overflow-hidden">
+    <section
+      className="text-[#EDEDED] px-6 py-20 md:px-20 overflow-hidden  bg-contain bg-center"
+      style={{
+        backgroundColor: "#0D0D0D",
+        backgroundImage: "url('/bg-image.jpg')",
+      }}
+    >
       <motion.div
         initial={{ opacity: 0, y: 1000 }}
         animate={{ opacity: 1, y: 0 }}
@@ -113,7 +119,7 @@ export default function About() {
           {[
             {
               title: "Junior Web Developer – SysReforms",
-              date: "April 2025 – Present",
+              date: "March 2025 – May 2025",
               details: [
                 "Engineered client-facing dashboards with dynamic data visualizations using React, Express, and SQL Server.",
                 "Built scalable full-stack features, optimized queries, and tackled critical bugs in a live production environment.",
