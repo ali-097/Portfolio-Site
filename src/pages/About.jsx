@@ -118,7 +118,7 @@ export default function About() {
         <div className="space-y-8">
           {[
             {
-              title: "Associate Web Developer – Devsinc",
+              title: "Associate Software Engineer – Devsinc",
               date: "September 2025 – Present",
               details: [
                 "Developed cross-platform web and mobile applications using React Native with seamless integration across devices.",
