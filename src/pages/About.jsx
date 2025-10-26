@@ -118,6 +118,16 @@ export default function About() {
         <div className="space-y-8">
           {[
             {
+              title: "Associate Web Developer – Devsinc",
+              date: "September 2025 – Present",
+              details: [
+                "Developed cross-platform web and mobile applications using React Native with seamless integration across devices.",
+                "Built and maintained robust backend services with Node.js and Python, ensuring scalability and performance.",
+                "Collaborated with design and development teams through Jira, managing sprints and project milestones effectively.",
+                "Led UI/UX design initiatives, creating intuitive app interfaces while overseeing end-to-end project delivery.",
+              ],
+            },
+            {
               title: "Junior Web Developer – SysReforms",
               date: "March 2025 – May 2025",
               details: [

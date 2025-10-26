@@ -9,6 +9,7 @@ import {
   FaChevronRight,
   FaTimes,
   FaSearchPlus,
+  FaTableTennis,
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
@@ -85,6 +86,35 @@ export default function Projects() {
     },
     {
       id: 3,
+      title: "PaddleHub",
+      description:
+        "PaddleHub is a comprehensive digital court booking system and management platform designed to streamline operations for paddle facilities with multiple courts. This intuitive platform simplifies the booking process for players while providing facility managers with powerful tools for court scheduling, user management, and real-time availability tracking. The system enhances the overall player experience with instant booking confirmations and seamless payment processing.",
+      technologies: [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Express",
+        "TailwindCSS",
+        "Framer Motion",
+        "Cloudinary",
+      ],
+      deployment: "https://paddlehub-fe.vercel.app/",
+      icon: <FaTableTennis className="text-2xl" />,
+      gradient: "from-cyan-500 to-blue-600",
+      features: [
+        "Real-time Court Booking",
+        "Availability Tracking",
+        "Multi-court Management",
+        "User Authentication",
+      ],
+      images: [
+        "/images/paddlehub-main.png",
+        "/images/paddlehub-2.png",
+        "/images/paddlehub-3.png",
+      ],
+    },
+    {
+      id: 4,
       title: "Fork & Flame",
       description:
         "A stunning restaurant website that combines elegant design with smooth functionality. Built with carefully crafted custom animations and intuitive user interactions, this platform showcases modern web development techniques while providing an exceptional dining experience online. The responsive design ensures seamless navigation across all devices.",
@@ -108,7 +138,7 @@ export default function Projects() {
       images: ["/images/fork-flame-main.png"],
     },
     {
-      id: 4,
+      id: 5,
       title: "Luxora Limos",
       description:
         "A modern, responsive limousine service website built with React and Vite, designed to deliver a premium user experience. It features an interactive booking form with validation and EmailJS integration for instant confirmations. Users can explore a luxury fleet with zoomable images, read testimonials, and find answers in the FAQ section. The clean design and smooth UI reflect the elegance and professionalism of a high-end transport service.",
