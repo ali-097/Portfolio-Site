@@ -13,6 +13,7 @@ import {
 import { resolveIcon } from "../lib/iconMap";
 import { useClipboard } from "../hooks/useClipboard";
 import Toast from "../components/ide/Toast";
+import StatTile from "../components/ide/StatTile";
 
 export default function Contact() {
   const { copied, copy } = useClipboard();
@@ -36,7 +37,7 @@ export default function Contact() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:items-start">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -50,21 +51,6 @@ export default function Contact() {
             <p className="text-gruvbox-subtle text-sm font-sans leading-relaxed">
               {contactPitch.copy}
             </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gruvbox-border">
-            {workInfo.map((item) => {
-              const Icon = resolveIcon(item.iconKey);
-              return (
-                <div key={item.label} className="flex items-start gap-2">
-                  <Icon className="text-gruvbox-orange mt-0.5 shrink-0" size={14} />
-                  <div>
-                    <p className="text-gruvbox-subtle text-xs">{item.label}</p>
-                    <p className="text-gruvbox-fg text-sm">{item.value}</p>
-                  </div>
-                </div>
-              );
-            })}
           </div>
 
           <div className="pt-4 border-t border-gruvbox-border">
@@ -107,6 +93,17 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="space-y-6"
         >
+          <div className="grid grid-cols-2 gap-3">
+            {workInfo.map((item) => (
+              <StatTile
+                key={item.label}
+                icon={resolveIcon(item.iconKey)}
+                value={item.value}
+                label={item.label}
+              />
+            ))}
+          </div>
+
           <div className="grid gap-4">
             {contactMethods.map((method) => {
               const Icon = resolveIcon(method.iconKey);
@@ -136,34 +133,40 @@ export default function Contact() {
               );
             })}
           </div>
-
-          <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-            <button
-              onClick={() => copy(social.email)}
-              className="flex items-center justify-center gap-2 bg-gruvbox-elevated hover:bg-gruvbox-border-strong px-5 py-3 rounded-lg transition text-gruvbox-fg text-sm font-medium"
-            >
-              <FaCopy /> Copy Email
-            </button>
-
-            <a
-              href={social.resumeUrl}
-              download
-              className="flex items-center justify-center gap-2 bg-gruvbox-elevated hover:bg-gruvbox-border-strong px-5 py-3 rounded-lg transition text-gruvbox-fg text-sm font-medium"
-            >
-              <VscCloudDownload /> Download Resume
-            </a>
-
-            <a
-              href={social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-gruvbox-elevated hover:bg-gruvbox-border-strong px-5 py-3 rounded-lg transition text-gruvbox-fg text-sm font-medium"
-            >
-              <FaGithub /> View GitHub
-            </a>
-          </div>
         </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="mt-10 flex flex-col sm:flex-row flex-wrap justify-center gap-3"
+      >
+        <button
+          onClick={() => copy(social.email)}
+          className="flex items-center justify-center gap-2 bg-gruvbox-elevated hover:bg-gruvbox-border-strong px-5 py-3 rounded-lg transition text-gruvbox-fg text-sm font-medium"
+        >
+          <FaCopy /> Copy Email
+        </button>
+
+        <a
+          href={social.resumeUrl}
+          download
+          className="flex items-center justify-center gap-2 bg-gruvbox-elevated hover:bg-gruvbox-border-strong px-5 py-3 rounded-lg transition text-gruvbox-fg text-sm font-medium"
+        >
+          <VscCloudDownload /> Download Resume
+        </a>
+
+        <a
+          href={social.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 bg-gruvbox-elevated hover:bg-gruvbox-border-strong px-5 py-3 rounded-lg transition text-gruvbox-fg text-sm font-medium"
+        >
+          <FaGithub /> View GitHub
+        </a>
+      </motion.div>
 
       <Toast show={copied} message="Email copied to clipboard!" />
     </section>

@@ -118,8 +118,8 @@ export const projects = [
       "A modern, responsive limousine service website built with React and Vite, designed to deliver a premium user experience. It features an interactive booking form with validation and EmailJS integration for instant confirmations. Users can explore a luxury fleet with zoomable images, read testimonials, and find answers in the FAQ section. The clean design and smooth UI reflect the elegance and professionalism of a high-end transport service.",
     technologies: ["React", "Tailwind", "EmailJs", "Responsive Design"],
     deployment: "https://luxoralimos.com/",
-    iconKey: "utensils",
-    gradient: "from-orange-500 to-red-600",
+    iconKey: "car",
+    gradient: "from-slate-600 to-gray-800",
     features: [
       "EmailJS integration for booking confirmations",
       "Interactive booking with validation",
