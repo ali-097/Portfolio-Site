@@ -1,0 +1,41 @@
+import {
+  FaBrain,
+  FaClock,
+  FaTableTennis,
+  FaUtensils,
+  FaPalette,
+  FaWordpress,
+  FaBuilding,
+  FaChartBar,
+  FaGlobeAmericas,
+  FaMapMarkerAlt,
+  FaBolt,
+  FaCode,
+  FaHandshake,
+  FaLightbulb,
+  FaEnvelope,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
+
+export const iconMap = {
+  brain: FaBrain,
+  clock: FaClock,
+  paddle: FaTableTennis,
+  utensils: FaUtensils,
+  design: FaPalette,
+  wordpress: FaWordpress,
+  enterprise: FaBuilding,
+  data: FaChartBar,
+  globe: FaGlobeAmericas,
+  map: FaMapMarkerAlt,
+  bolt: FaBolt,
+  code: FaCode,
+  handshake: FaHandshake,
+  lightbulb: FaLightbulb,
+  envelope: FaEnvelope,
+  linkedin: FaLinkedin,
+  github: FaGithub,
+};
+
+export const resolveIcon = (key) => iconMap[key] ?? FaCode;

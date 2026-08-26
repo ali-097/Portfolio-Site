@@ -2,159 +2,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   FaExternalLinkAlt,
   FaRocket,
-  FaBrain,
-  FaUtensils,
-  FaClock,
   FaChevronLeft,
   FaChevronRight,
   FaTimes,
   FaSearchPlus,
-  FaTableTennis,
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { projects, getWebPPath } from "../data/projects";
+import { resolveIcon } from "../lib/iconMap";
 
 export default function Projects() {
   const [currentImageIndex, setCurrentImageIndex] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState(null);
   const [modalProject, setModalProject] = useState(null);
-
-  const getWebPPath = (pngPath) => {
-    const fileName = pngPath.split("/").pop().replace(".png", ".webp");
-    return `/images/compressed-images/${fileName}`;
-  };
-
-  const projects = [
-    {
-      id: 1,
-      title: "Smart Estate",
-      description:
-        "An intelligent real estate platform that revolutionizes property investment through cutting-edge machine learning. Features advanced price prediction algorithms, automated sentiment analysis of community reviews, AI-powered property verification through image recognition, and dynamic bidding systems that adapt to market conditions in real-time.",
-      technologies: [
-        "React",
-        "Node.js",
-        "MongoDB",
-        "Express",
-        "Flask",
-        "TailwindCSS",
-        "Machine Learning",
-        "Python",
-      ],
-      deployment: "https://smartestate-fe.vercel.app/",
-      icon: <FaBrain className="text-2xl" />,
-      gradient: "from-blue-500 to-purple-600",
-      features: [
-        "ML Price Prediction",
-        "Sentiment Analysis",
-        "Image Verification",
-        "Dynamic Bidding",
-      ],
-      images: [
-        "/images/smart-estate-main.png",
-        "/images/smart-estate-2.png",
-        "/images/smart-estate-3.png",
-      ],
-    },
-    {
-      id: 2,
-      title: "Workforce Management System",
-      description:
-        "A comprehensive cloud-based solution designed specifically for restaurant operations. This GPS-enabled system streamlines employee management by automatically tracking attendance, calculating work hours, and processing payroll with precision. The intuitive dashboard provides real-time insights into workforce productivity and operational efficiency.",
-      technologies: [
-        "React",
-        "Node.js",
-        "MongoDB",
-        "Express",
-        "TailwindCSS",
-        "GPS Integration",
-        "AWS Cloud Services",
-      ],
-      deployment: "https://wms-frontend-omega.vercel.app/",
-      icon: <FaClock className="text-2xl" />,
-      gradient: "from-green-500 to-teal-600",
-      features: [
-        "GPS Tracking",
-        "Attendance Management",
-        "Payroll Automation",
-        "Cloud-based",
-      ],
-      images: [
-        "/images/wms-main.png",
-        "/images/wms-2.png",
-        "/images/wms-3.png",
-      ],
-    },
-    {
-      id: 3,
-      title: "PaddleHub",
-      description:
-        "PaddleHub is a comprehensive digital court booking system and management platform designed to streamline operations for paddle facilities with multiple courts. This intuitive platform simplifies the booking process for players while providing facility managers with powerful tools for court scheduling, user management, and real-time availability tracking. The system enhances the overall player experience with instant booking confirmations and seamless payment processing.",
-      technologies: [
-        "React",
-        "Node.js",
-        "MongoDB",
-        "Express",
-        "TailwindCSS",
-        "Framer Motion",
-        "Cloudinary",
-      ],
-      deployment: "https://paddlehub-fe.vercel.app/",
-      icon: <FaTableTennis className="text-2xl" />,
-      gradient: "from-cyan-500 to-blue-600",
-      features: [
-        "Real-time Court Booking",
-        "Availability Tracking",
-        "Multi-court Management",
-        "User Authentication",
-      ],
-      images: [
-        "/images/paddlehub-main.png",
-        "/images/paddlehub-2.png",
-        "/images/paddlehub-3.png",
-      ],
-    },
-    {
-      id: 4,
-      title: "Fork & Flame",
-      description:
-        "A stunning restaurant website that combines elegant design with smooth functionality. Built with carefully crafted custom animations and intuitive user interactions, this platform showcases modern web development techniques while providing an exceptional dining experience online. The responsive design ensures seamless navigation across all devices.",
-      technologies: [
-        "React",
-        "Node.js",
-        "Express",
-        "Custom CSS",
-        "Animations",
-        "JavaScript",
-      ],
-      deployment: "https://fork-flame-five.vercel.app/",
-      icon: <FaUtensils className="text-2xl" />,
-      gradient: "from-orange-500 to-red-600",
-      features: [
-        "Custom Animations",
-        "Restaurant Management",
-        "Interactive UI",
-        "Responsive Design",
-      ],
-      images: ["/images/fork-flame-main.png"],
-    },
-    {
-      id: 5,
-      title: "Luxora Limos",
-      description:
-        "A modern, responsive limousine service website built with React and Vite, designed to deliver a premium user experience. It features an interactive booking form with validation and EmailJS integration for instant confirmations. Users can explore a luxury fleet with zoomable images, read testimonials, and find answers in the FAQ section. The clean design and smooth UI reflect the elegance and professionalism of a high-end transport service.",
-      technologies: ["React", "Tailwind", "EmailJs", "Responsive Design"],
-      deployment: "https://luxoralimos.com/",
-      icon: <FaUtensils className="text-2xl" />,
-      gradient: "from-orange-500 to-red-600",
-      features: [
-        "EmailJS integration for booking confirmations",
-        "Interactive booking with validation",
-        "Responsive Design",
-        "Luxury fleet display",
-      ],
-      images: ["/images/luxora-limos-main.png", "/images/luxora-limos-2.png"],
-    },
-  ];
 
   const nextImage = (projectId, totalImages) => {
     setCurrentImageIndex((prev) => ({
@@ -229,61 +91,48 @@ export default function Projects() {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalOpen, modalImage, modalProject]);
 
   return (
-    <section
-      id="projects"
-      className="text-[#EDEDED] px-6 py-20 md:px-20 overflow-hidden bg-contain bg-center"
-      style={{
-        backgroundColor: "#0D0D0D",
-        backgroundImage: "url('/bg-image.jpg')",
-      }}
-    >
+    <section className="px-6 py-16 md:px-16 md:py-20 max-w-6xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{
-          duration: 1,
-          delay: 0.2,
-          type: "spring",
-          stiffness: 100,
-        }}
-        className="text-center max-w-4xl mx-auto mb-16"
+        transition={{ duration: 0.6 }}
+        className="mb-12"
       >
-        <h2 className="text-4xl md:text-5xl font-extrabold text-[#8B5CF6] mb-4">
+        <p className="text-sm text-gruvbox-subtle mb-2">
+          <span className="text-gruvbox-green">// </span>5 projects, most recent first
+        </p>
+        <h2 className="text-3xl md:text-4xl font-bold text-gruvbox-fg">
           Featured Projects
         </h2>
-        <p className="text-lg text-[#A1A1A1]">
+        <p className="text-gruvbox-subtle mt-3 max-w-2xl font-sans leading-relaxed">
           Here are some of my recent projects that showcase my skills in
           full-stack development, machine learning integration, and modern web
           technologies.
         </p>
       </motion.div>
 
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-1 gap-8">
-          {projects.map((project, index) => (
+      <div className="space-y-8">
+        {projects.map((project, index) => {
+          const Icon = resolveIcon(project.iconKey);
+          return (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: index * 0.2,
-                type: "spring",
-                stiffness: 100,
-              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
               className="group relative"
             >
-              <div className="bg-[#161616] border border-[#1F1F1F] rounded-2xl p-8 hover:border-[#8B5CF6] transition-all duration-300 hover:shadow-2xl hover:shadow-[#8B5CF6]/10">
+              <div className="bg-gruvbox-panel border border-gruvbox-border rounded-xl p-6 md:p-8 hover:border-gruvbox-orange/50 transition-colors duration-300">
                 <div className="flex flex-col lg:flex-row gap-8">
                   <div className="lg:w-1/2">
                     <div className="relative mb-6 group/image">
                       <div
-                        className="aspect-video bg-[#1E1E1E] rounded-xl overflow-hidden border border-[#2C2C2C] cursor-pointer relative"
+                        className="aspect-video bg-gruvbox-elevated rounded-lg overflow-hidden border border-gruvbox-border cursor-pointer relative"
                         onClick={() =>
                           openModal(
                             project.images[currentImageIndex[project.id] || 0],
@@ -303,30 +152,13 @@ export default function Projects() {
                               project.images[currentImageIndex[project.id] || 0]
                             }
                             alt={`${project.title} screenshot`}
-                            className="w-full h-full object-fit group-hover/image:scale-105 transition-transform duration-300"
-                            onError={(e) => {
-                              e.target.style.display = "none";
-                              e.target.nextSibling.style.display = "flex";
-                            }}
+                            className="w-full h-full object-cover group-hover/image:scale-105 transition-transform duration-300"
                           />
                         </picture>
 
-                        <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/30 transition-all duration-300 flex items-center justify-center">
                           <div className="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
-                            <FaSearchPlus className="text-white text-2xl" />
-                          </div>
-                        </div>
-
-                        <div className="w-full h-full bg-gradient-to-br from-[#8B5CF6]/20 to-[#7C3AED]/20 hidden items-center justify-center">
-                          <div className="text-center">
-                            <div
-                              className={`w-16 h-16 rounded-xl bg-gradient-to-r ${project.gradient} flex items-center justify-center mx-auto mb-2`}
-                            >
-                              {project.icon}
-                            </div>
-                            <p className="text-[#A1A1A1] text-sm">
-                              Preview Coming Soon
-                            </p>
+                            <FaSearchPlus className="text-gruvbox-fg text-2xl" />
                           </div>
                         </div>
                       </div>
@@ -338,7 +170,7 @@ export default function Projects() {
                               e.stopPropagation();
                               prevImage(project.id, project.images.length);
                             }}
-                            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 hover:bg-black/70 z-10"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-gruvbox-bg/70 text-gruvbox-fg p-2 rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 hover:bg-gruvbox-bg z-10"
                           >
                             <FaChevronLeft />
                           </button>
@@ -347,12 +179,12 @@ export default function Projects() {
                               e.stopPropagation();
                               nextImage(project.id, project.images.length);
                             }}
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 hover:bg-black/70 z-10"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-gruvbox-bg/70 text-gruvbox-fg p-2 rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 hover:bg-gruvbox-bg z-10"
                           >
                             <FaChevronRight />
                           </button>
 
-                          <div className="flex justify-center mt-3 space-x-2">
+                          <div className="flex justify-center mt-3 gap-2">
                             {project.images.map((_, imgIndex) => (
                               <button
                                 key={imgIndex}
@@ -365,8 +197,8 @@ export default function Projects() {
                                 className={`w-2 h-2 rounded-full transition-colors ${
                                   (currentImageIndex[project.id] || 0) ===
                                   imgIndex
-                                    ? "bg-[#8B5CF6]"
-                                    : "bg-[#3A3A3A] hover:bg-[#5A5A5A]"
+                                    ? "bg-gruvbox-orange"
+                                    : "bg-gruvbox-border-strong hover:bg-gruvbox-muted"
                                 }`}
                               />
                             ))}
@@ -375,15 +207,19 @@ export default function Projects() {
                       )}
                     </div>
 
-                    {/* Project Title & Tech */}
-                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#8B5CF6] transition-colors">
-                      {project.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-2 mb-6 w-full">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-8 h-8 rounded-md bg-gruvbox-elevated flex items-center justify-center text-gruvbox-orange">
+                        <Icon size={15} />
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-bold text-gruvbox-fg group-hover:text-gruvbox-orange transition-colors">
+                        {project.title}
+                      </h3>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1 text-xs bg-[#2A2A2A] text-[#A1A1A1] rounded-full border border-[#3A3A3A] hover:border-[#8B5CF6] transition-colors"
+                          className="px-2.5 py-1 text-xs bg-gruvbox-elevated text-gruvbox-subtle rounded-full border border-gruvbox-border"
                         >
                           {tech}
                         </span>
@@ -392,78 +228,72 @@ export default function Projects() {
                   </div>
 
                   <div className="lg:w-1/2">
-                    <p className="text-[#D4D4D4] mb-6 leading-relaxed">
+                    <p className="text-gruvbox-fg/85 mb-6 leading-relaxed font-sans">
                       {project.description}
                     </p>
 
                     <div className="mb-6">
-                      <h4 className="text-lg font-semibold text-[#8B5CF6] mb-3">
-                        Key Features:
+                      <h4 className="text-sm font-semibold text-gruvbox-aqua mb-3 uppercase tracking-wide">
+                        Key Features
                       </h4>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {project.features.map((feature, featureIndex) => (
                           <li
                             key={featureIndex}
-                            className="flex items-center gap-2 text-[#D4D4D4]"
+                            className="flex items-center gap-2 text-sm text-gruvbox-fg/85"
                           >
-                            <div className="w-2 h-2 bg-[#8B5CF6] rounded-full"></div>
+                            <div className="w-1.5 h-1.5 bg-gruvbox-orange rounded-full shrink-0" />
                             {feature}
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="flex flex-wrap gap-4">
-                      <motion.a
-                        href={project.deployment}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-[#8B5CF6] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#7C3AED] transition-all duration-300"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <FaRocket />
-                        Live Demo
-                        <FaExternalLinkAlt className="text-sm" />
-                      </motion.a>
-                    </div>
+                    <a
+                      href={project.deployment}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-gruvbox-orange text-gruvbox-bg px-5 py-2.5 rounded-lg font-medium hover:opacity-90 transition"
+                    >
+                      <FaRocket />
+                      Live Demo
+                      <FaExternalLinkAlt className="text-xs" />
+                    </a>
                   </div>
                 </div>
               </div>
             </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <p className="text-[#A1A1A1] mb-6">
-            Want to see more of my work or discuss a potential project?
-          </p>
-          <motion.a
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white px-8 py-4 rounded-lg font-medium hover:shadow-lg hover:shadow-[#8B5CF6]/25 transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Let's Work Together
-            <FaRocket />
-          </motion.a>
-        </motion.div>
+          );
+        })}
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mt-16"
+      >
+        <p className="text-gruvbox-subtle mb-6">
+          Want to see more of my work or discuss a potential project?
+        </p>
+        <Link
+          to="/contact"
+          className="inline-flex items-center gap-2 bg-gruvbox-orange text-gruvbox-bg px-8 py-3.5 rounded-lg font-medium hover:opacity-90 transition"
+        >
+          Let's Work Together
+          <FaRocket />
+        </Link>
+      </motion.div>
 
       <AnimatePresence>
         {modalOpen && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[90] flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
           >
             <div
               className="absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -472,14 +302,14 @@ export default function Projects() {
 
             <motion.div
               className="relative max-w-6xl max-h-[90vh] w-full"
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              exit={{ scale: 0.92, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
             >
               <button
                 onClick={closeModal}
-                className="absolute top-4 right-4 z-10 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 hover:scale-110"
+                className="absolute top-4 right-4 z-10 bg-gruvbox-bg/70 text-gruvbox-fg p-3 rounded-full hover:bg-gruvbox-bg transition"
               >
                 <FaTimes className="text-lg" />
               </button>
@@ -488,60 +318,54 @@ export default function Projects() {
                 <>
                   <button
                     onClick={prevModalImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 hover:scale-110"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-gruvbox-bg/70 text-gruvbox-fg p-3 rounded-full hover:bg-gruvbox-bg transition"
                   >
                     <FaChevronLeft className="text-lg" />
                   </button>
                   <button
                     onClick={nextModalImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all duration-300 hover:scale-110"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-gruvbox-bg/70 text-gruvbox-fg p-3 rounded-full hover:bg-gruvbox-bg transition"
                   >
                     <FaChevronRight className="text-lg" />
                   </button>
                 </>
               )}
 
-              <div className="bg-[#161616] rounded-2xl overflow-hidden border border-[#2C2C2C] shadow-2xl">
+              <div className="bg-gruvbox-panel rounded-xl overflow-hidden border border-gruvbox-border-strong shadow-2xl">
                 <picture>
                   <source srcSet={getWebPPath(modalImage)} type="image/webp" />
                   <img
                     src={modalImage}
                     alt={`${modalProject?.title} screenshot`}
-                    className="w-full h-auto max-h-[70vh] object-fit"
+                    className="w-full h-auto max-h-[70vh] object-contain bg-gruvbox-bg"
                   />
                 </picture>
 
-                <div className="p-6 border-t border-[#2C2C2C]">
-                  <div className="flex items-center justify-between flex-wrap gap-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">
-                        {modalProject?.title}
-                      </h3>
-                      <div className="flex items-center gap-4 text-[#A1A1A1] text-sm">
+                <div className="p-5 border-t border-gruvbox-border flex items-center justify-between flex-wrap gap-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-gruvbox-fg mb-1">
+                      {modalProject?.title}
+                    </h3>
+                    <div className="flex items-center gap-3 text-gruvbox-subtle text-xs">
+                      <span>Arrow keys to navigate &middot; Esc to close</span>
+                      {modalProject && modalProject.images.length > 1 && (
                         <span>
-                          Use arrow keys to navigate • Press ESC to close
+                          {modalProject.images.indexOf(modalImage) + 1} of{" "}
+                          {modalProject.images.length}
                         </span>
-                        {modalProject && modalProject.images.length > 1 && (
-                          <span>
-                            {modalProject.images.indexOf(modalImage) + 1} of{" "}
-                            {modalProject.images.length}
-                          </span>
-                        )}
-                      </div>
+                      )}
                     </div>
-                    <motion.a
-                      href={modalProject?.deployment}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-[#8B5CF6] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#7C3AED] transition-all duration-300"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <FaRocket />
-                      Visit Site
-                      <FaExternalLinkAlt className="text-xs" />
-                    </motion.a>
                   </div>
+                  <a
+                    href={modalProject?.deployment}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-gruvbox-orange text-gruvbox-bg px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition"
+                  >
+                    <FaRocket />
+                    Visit Site
+                    <FaExternalLinkAlt className="text-xs" />
+                  </a>
                 </div>
               </div>
             </motion.div>

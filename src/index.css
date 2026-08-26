@@ -1,42 +1,73 @@
 @import "tailwindcss";
 
-/* Ensure proper scrolling on mobile */
+@theme {
+  /* surfaces */
+  --color-gruvbox-bg: #1d2021;
+  --color-gruvbox-panel: #282828;
+  --color-gruvbox-elevated: #32302f;
+
+  /* borders / muted */
+  --color-gruvbox-border: #3c3836;
+  --color-gruvbox-border-strong: #504945;
+  --color-gruvbox-muted: #665c54;
+  --color-gruvbox-subtle: #928374;
+
+  /* text */
+  --color-gruvbox-fg: #ebdbb2;
+
+  /* accents (token roles) */
+  --color-gruvbox-orange: #fe8019;
+  --color-gruvbox-aqua: #83a598;
+  --color-gruvbox-green: #b8bb26;
+  --color-gruvbox-red: #fb4934;
+  --color-gruvbox-yellow: #fabd2f;
+  --color-gruvbox-purple: #d3869b;
+
+  /* type */
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
 html,
 body {
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  background-color: var(--color-gruvbox-bg);
+  color: var(--color-gruvbox-fg);
+  font-family: var(--font-mono);
 }
 
 body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Hide scrollbar for web devices while keeping scroll functionality */
-@media (min-width: 768px) {
-  /* Webkit browsers (Chrome, Safari, Edge) */
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: transparent;
-  }
-
-  /* Firefox */
-  html {
-    scrollbar-width: none;
-  }
-
-  /* IE and Edge */
-  body {
-    -ms-overflow-style: none;
-  }
+/* Thin, IDE-style scrollbars instead of hiding them entirely */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gruvbox-border-strong) transparent;
 }
 
-/* Fix for mobile viewport units */
-@supports (-webkit-touch-callout: none) {
-  .min-h-screen {
-    min-height: -webkit-fill-available;
-  }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gruvbox-border-strong);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gruvbox-muted);
+}
+
+/* IDE shell fills the viewport; dvh keeps it correct on mobile browsers
+   whose chrome shrinks/grows the visible area (iOS Safari, etc.) */
+.ide-shell-height {
+  height: 100vh;
+  height: 100dvh;
 }
