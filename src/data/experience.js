@@ -6,23 +6,19 @@ export const experience = [
     commitMessage: "feat(career): join Devsinc as Associate Software Engineer",
     date: "September 2025 – Present",
     achievements: [
-      "Developed cross-platform web and mobile applications using React Native with seamless integration across devices.",
-      "Built and maintained robust backend services with Node.js and Python, ensuring scalability and performance.",
-      "Collaborated with design and development teams through Jira, managing sprints and project milestones effectively.",
-      "Led UI/UX design initiatives, creating intuitive app interfaces while overseeing end-to-end project delivery.",
+      "Sole engineer on client projects in agritech, e-commerce, and sports technology, owning Django and Node.js backends, React and React Native clients, Docker environments, GitHub Actions pipelines, and cloud deployment.",
+      "Client-facing on current work: run requirements calls, demos, and scoping with the client, product manager, and designer, then turn outcomes into architecture and sprint delivery.",
     ],
   },
   {
     id: "sysreforms",
-    company: "SysReforms",
+    company: "SysReforms International",
     title: "Junior Web Developer",
-    commitMessage: "feat(career): join SysReforms as Junior Web Developer",
+    commitMessage:
+      "feat(career): join SysReforms International as Junior Web Developer",
     date: "March 2025 – May 2025",
     achievements: [
-      "Engineered client-facing dashboards with dynamic data visualizations using React, Express, and SQL Server.",
-      "Built scalable full-stack features, optimized queries, and tackled critical bugs in a live production environment.",
-      "Wrote and consumed RESTful APIs, implemented role-based access control, and enhanced application responsiveness.",
-      "Collaborated with cross-functional teams and followed Agile methodologies using Plane, Git, and weekly sprints.",
+      "Delivered three features end to end for a client-facing performance monitoring platform: built the REST API layer in Node.js and Express, extended an existing SQL Server schema with new tables and views, and developed the React and Material-UI frontend with CKEditor rich data entry.",
     ],
   },
   {

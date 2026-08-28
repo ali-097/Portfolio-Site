@@ -3,7 +3,13 @@ import { bio } from "../data/bio";
 import { fileTree } from "../data/fileTree";
 import { techStack } from "../data/techStack";
 
-const ROUTE_MAP = { home: "/", about: "/about", projects: "/projects", contact: "/contact" };
+const ROUTE_MAP = {
+  home: "/",
+  about: "/about",
+  projects: "/projects",
+  contact: "/contact",
+  resume: "/resume",
+};
 
 function flattenFiles(node, acc = []) {
   if (node.type === "file") acc.push(node.name);
@@ -107,10 +113,10 @@ export const commands = [
   },
   {
     name: "resume",
-    describe: "Open my résumé in a new tab",
+    describe: "Open my résumé",
     run: (args, ctx) => {
       ctx.print(["Opening résumé..."]);
-      ctx.openExternal(social.resumeUrl);
+      ctx.navigate("/resume");
     },
   },
   {
@@ -119,7 +125,9 @@ export const commands = [
     run: (args, ctx) => {
       const route = ROUTE_MAP[(args[0] || "").toLowerCase()];
       if (!route) {
-        ctx.print([`open: unknown target '${args[0] || ""}'. Try: home, about, projects, contact`]);
+        ctx.print([
+          `open: unknown target '${args[0] || ""}'. Try: home, about, projects, contact, resume`,
+        ]);
         return;
       }
       ctx.print([`Opening ${args[0]}...`]);

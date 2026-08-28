@@ -16,6 +16,7 @@ import {
   VscTerminal,
   VscCloudDownload,
   VscCopy,
+  VscFilePdf,
 } from "react-icons/vsc";
 import { useCommandPalette } from "../../hooks/useCommandPalette";
 import { useIDEShell } from "../../hooks/useIDEShell";
@@ -84,6 +85,12 @@ export default function CommandPalette() {
               className="flex items-center gap-2 px-2 py-2 rounded text-sm text-gruvbox-fg cursor-pointer data-[selected=true]:bg-gruvbox-elevated"
             >
               <VscMail /> Contact
+            </CommandItem>
+            <CommandItem
+              onSelect={() => go("/resume")}
+              className="flex items-center gap-2 px-2 py-2 rounded text-sm text-gruvbox-fg cursor-pointer data-[selected=true]:bg-gruvbox-elevated"
+            >
+              <VscFilePdf /> Resume
             </CommandItem>
           </CommandGroup>
 

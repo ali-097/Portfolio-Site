@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { VscSourceControl, VscSearch, VscBell } from "react-icons/vsc";
 import { useIDEShell } from "../hooks/useIDEShell";
 import { routeFileMap } from "../data/fileTree";
+import { languageFor } from "../lib/fileIcons";
 
 export default function StatusBar() {
   const location = useLocation();
@@ -24,7 +25,7 @@ export default function StatusBar() {
       <div className="hidden md:flex items-center gap-4">
         <span>UTF-8</span>
         <span>Ln 24, Col 7</span>
-        <span>{fileLabel.endsWith(".jsx") ? "JavaScript JSX" : "Plain Text"}</span>
+        <span>{languageFor(fileLabel)}</span>
         <button
           onClick={togglePalette}
           className="flex items-center gap-1 hover:opacity-80 transition-opacity"

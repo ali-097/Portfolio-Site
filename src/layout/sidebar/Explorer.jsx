@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { VscChevronRight, VscChevronDown, VscFolder, VscFile } from "react-icons/vsc";
+import { VscChevronRight, VscChevronDown, VscFolder } from "react-icons/vsc";
 import { fileTree } from "../../data/fileTree";
+import { fileIconFor } from "../../lib/fileIcons";
 
 function TreeNode({ node, depth, onNavigate }) {
   const [open, setOpen] = useState(true);
@@ -28,6 +29,7 @@ function TreeNode({ node, depth, onNavigate }) {
   }
 
   const active = location.pathname === node.route;
+  const FileIcon = fileIconFor(node.name);
 
   return (
     <button
@@ -39,7 +41,7 @@ function TreeNode({ node, depth, onNavigate }) {
       }`}
       style={{ paddingLeft: `${depth * 14 + 8 + 18}px` }}
     >
-      <VscFile className="shrink-0" size={14} />
+      <FileIcon className="shrink-0" size={14} />
       <span className="truncate">{node.name}</span>
     </button>
   );

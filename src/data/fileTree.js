@@ -18,6 +18,11 @@ export const fileTree = {
         },
       ],
     },
+    {
+      name: "public",
+      type: "folder",
+      children: [{ name: "Resume.pdf", type: "file", route: "/resume" }],
+    },
   ],
 };
 
@@ -32,6 +37,10 @@ export const routeFileMap = {
     label: "Contact.jsx",
     path: "portfolio > src > pages > Contact.jsx",
   },
+  "/resume": {
+    label: "Resume.pdf",
+    path: "portfolio > public > Resume.pdf",
+  },
 };
 
 export const routeToShellPath = {
@@ -39,4 +48,5 @@ export const routeToShellPath = {
   "/about": "~/about",
   "/projects": "~/projects",
   "/contact": "~/contact",
+  "/resume": "~/resume",
 };

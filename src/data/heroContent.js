@@ -1,8 +1,12 @@
 export const heroContent = {
   greeting: "I am a",
-  typewriterWords: ["Web Developer", "Software Engineer", "Tech Enthusiast"],
+  typewriterWords: [
+    "Full-Stack Engineer",
+    "React Native Developer",
+    "Django & Node.js Backend Dev",
+  ],
   tagline:
-    "Bringing ideas to life with code — from frontends that wow to backends that scale.",
+    "I own products end to end — database and API through to deployment — across web and mobile.",
   primaryCta: { label: "View My Work", to: "/projects" },
   secondaryCta: { label: "Download Resume" },
 };

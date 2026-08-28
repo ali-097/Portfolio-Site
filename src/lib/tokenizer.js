@@ -62,9 +62,11 @@ export function tokenizeBio(bio) {
 export function tokenizePackage(techStack) {
   const lines = [];
   const categoryLabels = {
+    languages: "languages",
     frontend: "frontend",
     backend: "backend & apis",
     databases: "databases",
+    testing: "testing & devops",
     tools: "tooling",
   };
 
